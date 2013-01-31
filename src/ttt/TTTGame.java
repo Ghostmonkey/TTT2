@@ -18,12 +18,12 @@ public class TTTGame {
         
     public TTTGame(int player){
     board = new HashMap();
-    board.put("serverBank", 1);
-    board.put("clientBank", 3);
+    board.put("x0y0", 3);//Client bank
+    board.put("x9y9", 3);//Server bank
     board.put("x1y1", 0);
-    board.put("x1y1", 1);
+    board.put("x1y1", 0);
     board.put("x1y2", 0);
-    board.put("x1y3", 1);
+    board.put("x1y3", 0);
     board.put("x2y1", 0);
     board.put("x2y2", 0);
     board.put("x2y3", 0);
@@ -39,43 +39,62 @@ public class TTTGame {
         int winner;
         winner = 0;
         //Rows
-        if(getX1y1() + getX2y1() + getX3y1() == 3 || getX1y2() + getX2y2() + getX3y2() == 3 || getX1y3() + getX2y3() + getX3y3() == 3){
-            winner = 1;
+        if(getX1y1() == getX2y1() && getX1y1() == getX3y1() && getX1y1() != 0){
+            winner = getX1y1();
         }
-        if(getX1y1() + getX2y1() + getX3y1() == 6 || getX1y2() + getX2y2() + getX3y2() == 6 || getX1y3() + getX2y3() + getX3y3() == 6){
-            winner = 2;
+        if(getX1y2() == getX2y2() && getX1y2() == getX3y2() && getX1y1() != 0){
+            winner = getX1y2();
         }
-        //Cols
-        if(getX1y1() + getX1y2() + getX1y3() == 3 || getX2y1() + getX2y2() + getX2y3() == 3 || getX3y1() + getX3y2() + getX3y3() == 3){
-            
+        if(getX1y3() == getX2y3() && getX1y3() == getX3y3() && getX1y3() != 0){
+            winner = getX1y3();
         }
-        if(getX1y1() + getX1y2() + getX1y3() == 3 || getX2y1() + getX2y2() + getX2y3() == 3 || getX3y1() + getX3y2() + getX3y3() == 3){
-            winner = 1;
+        
+        //Columns
+        if(getX1y1() == getX1y2() && getX1y1() == getX1y3() && getX1y1() != 0){
+            winner = getX1y1();
         }
-        if(getX1y1() + getX1y2() + getX1y3() == 6 || getX2y1() + getX2y2() + getX2y3() == 6 || getX3y1() + getX3y2() + getX3y3() == 6){
-            winner = 2;
+        if(getX2y1() == getX2y2() && getX2y1() == getX2y3() && getX2y1() != 0){
+            winner = getX2y1();
         }
+        if(getX3y1() == getX3y2() && getX3y1() == getX3y3() && getX3y1() != 0){
+            winner = getX3y1();
+        }
+        
         //Diagonals
-        if(getX1y1() + getX2y2() + getX3y3() == 3 || getX3y1() + getX2y2() + getX1y3() == 3){
-            winner = 1;
+        if(getX1y1() == getX2y2() && getX1y1() == getX3y3() && getX1y1() != 0){
+            winner = getX1y1();
         }
-        if(getX1y1() + getX2y2() + getX3y3() == 6 || getX3y1() + getX2y2() + getX1y3() == 6){
-            winner = 2;
+        if(getX3y1() == getX2y2() && getX3y1() == getX1y3() && getX3y1() != 0){
+            winner = getX3y1();
         }
         return winner;
     }
 
     public boolean makeMove(int player, String from, String to){
         boolean valid = true;
-        if(player == 1){
-            
+        
+        if(!(board.get(to) == 0)){
+            valid = false;
+            System.out.println("Till är upptagen");
         }
-        if(player == 2){
-            
+        
+        //Kollar om det är en bank och i så fall om den är 0 eller mindre 
+        if((from.equalsIgnoreCase("x0y0") || from.equalsIgnoreCase("x9y9")) && board.get(from) <= 0){
+            valid = false;
+            System.out.println("Bank men tom");
+            if(!(board.get(from) == player)){//Problem för banken är inte spelarens nummer
+                valid = false;
+                System.out.println("Från är inte din");
+            }   
         }
-        if(board.get(from) == player && board.get(to) == 0){
-            valid = true;
+        
+        //Genomför draget
+        if(from.equalsIgnoreCase("x0y0") || from.equalsIgnoreCase("x9y9")){
+            board.put(from, (board.get(from) - 1));
+        }else{
+            board.put(from, 0);
         }
+        board.put(to, player);
         return valid;
     }
     
@@ -152,18 +171,24 @@ public class TTTGame {
     }
 
     public int getServerBank() {
-        return board.get("serverBank");
+        return board.get("x9y9");
     }
 
     public void setServerBank(int serverBank) {
-        board.put("serverBank", serverBank);
+        board.put("x9y9", serverBank);
     }
 
     public int getClientBank() {
-        return board.get("clientBank");
+        return board.get("x0y0");
     }
 
     public void setClientBank(int clientBank) {
-        board.put("clientBank", clientBank);
+        board.put("x0y0", clientBank);
+    }
+    
+    public int get(String name){
+        int nr;
+        nr = board.get(name);
+        return nr;
     }
 }

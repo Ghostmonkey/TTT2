@@ -3,10 +3,11 @@ package ttt;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 /**
  *
- * @author Dahle
+ * @author Daniel Karlsson
  */
 public class TTT extends javax.swing.JFrame implements KeyListener {
 
@@ -38,6 +39,20 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
         this.setTitle("Tic Tac Toe");
         newChatMessages = 0;
         newSystemMessages = 0;
+        String message = "201:From:x0y0To:x1y2";
+        System.out.println(message.substring(message.indexOf("From:")+5, message.indexOf("From:")+9));
+        System.out.println(message.substring(message.indexOf("To:")+3, message.indexOf("To:")+7));
+        //System.out.println("201:From:x0y0To:x1y2".substring("201:From:x0y0To:x1y2".indexOf(("From:")+1), "201:From:x0y0To:x1y2".indexOf(("From:")+5)));
+        int toint = 0;
+        String to = "x2y2";
+        String from = "x0y0";
+        int bank = 3;
+        if(!(toint == 0)){
+            System.out.println("Invalido");
+        }
+        if((from.equalsIgnoreCase("x0y0") || from.equalsIgnoreCase("x9y9")) && bank <= 0){
+            System.out.println("Invalido");
+        }
     }
 
     /**
@@ -89,15 +104,19 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
         jLabelMoveFrom = new javax.swing.JLabel();
         jButtonUpdate = new javax.swing.JButton();
         jLabelBank = new javax.swing.JLabel();
+        jTextFieldFrom = new javax.swing.JTextField();
+        jTextFieldTo = new javax.swing.JTextField();
+        jLabelMoveTo1 = new javax.swing.JLabel();
+        jLabelMoveFrom1 = new javax.swing.JLabel();
+        jLabelBank4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabelBank5 = new javax.swing.JLabel();
+        jLabelOBank = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemConnect = new javax.swing.JMenuItem();
         jMenuItemCreate = new javax.swing.JMenuItem();
         jMenuItemQuit = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
 
         jInternalFrame1.setVisible(true);
 
@@ -413,7 +432,33 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
             }
         });
 
-        jLabelBank.setText("Bank nr:");
+        jLabelBank.setText("Bank:");
+
+        jTextFieldFrom.setText("x0y0");
+        jTextFieldFrom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldFromActionPerformed(evt);
+            }
+        });
+
+        jTextFieldTo.setText("x2y2");
+
+        jLabelMoveTo1.setText("MoveFrom: ");
+
+        jLabelMoveFrom1.setText("MoveTo:");
+
+        jLabelBank4.setText("Bank:");
+
+        jButton1.setText("Set");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabelBank5.setText("Other Bank:");
+
+        jLabelOBank.setText("Other Bank:");
 
         javax.swing.GroupLayout jPanel_x1y2Layout = new javax.swing.GroupLayout(jPanel_x1y2);
         jPanel_x1y2.setLayout(jPanel_x1y2Layout);
@@ -423,62 +468,91 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
                 .addContainerGap()
                 .addGroup(jPanel_x1y2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_x1y2Layout.createSequentialGroup()
-                        .addComponent(jLabel_x1y3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel_x2y3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel_x3y3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelMoveTo))
+                        .addGroup(jPanel_x1y2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel_x1y2Layout.createSequentialGroup()
+                                .addComponent(jLabel_x1y3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel_x2y3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel_x3y3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelMoveTo1))
+                            .addGroup(jPanel_x1y2Layout.createSequentialGroup()
+                                .addComponent(jLabel_x1y2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel_x2y2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel_x3y2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelMoveFrom1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel_x1y2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelMoveFrom)
+                            .addGroup(jPanel_x1y2Layout.createSequentialGroup()
+                                .addComponent(jLabelMoveTo)
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabelBank5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelOBank))))
                     .addGroup(jPanel_x1y2Layout.createSequentialGroup()
-                        .addComponent(jLabel_x1y2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel_x2y2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel_x3y2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelMoveFrom))
-                    .addGroup(jPanel_x1y2Layout.createSequentialGroup()
-                        .addComponent(jLabel_x1y1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel_x2y1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel_x3y1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelBank))
-                    .addGroup(jPanel_x1y2Layout.createSequentialGroup()
-                        .addComponent(jLabelPlayerNumber)
-                        .addGap(168, 168, 168)
-                        .addComponent(jButtonUpdate)))
+                        .addGroup(jPanel_x1y2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelPlayerNumber)
+                            .addGroup(jPanel_x1y2Layout.createSequentialGroup()
+                                .addComponent(jLabel_x1y1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel_x2y1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel_x3y1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelBank4)))
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel_x1y2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelBank)
+                            .addComponent(jButtonUpdate))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel_x1y2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel_x1y2Layout.setVerticalGroup(
             jPanel_x1y2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel_x1y2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel_x1y2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonUpdate)
+                .addGroup(jPanel_x1y2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_x1y2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel_x1y3)
+                        .addComponent(jLabel_x2y3)
+                        .addComponent(jLabel_x3y3)
+                        .addComponent(jTextFieldFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_x1y2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabelMoveTo1)
+                        .addComponent(jLabelMoveTo)
+                        .addComponent(jLabelBank5)
+                        .addComponent(jLabelOBank)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_x1y2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_x1y2)
+                    .addComponent(jLabel_x2y2)
+                    .addComponent(jLabel_x3y2)
+                    .addComponent(jLabelMoveFrom)
+                    .addComponent(jTextFieldTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelMoveFrom1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel_x1y2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_x1y2Layout.createSequentialGroup()
-                        .addGroup(jPanel_x1y2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel_x1y3)
-                            .addComponent(jLabel_x2y3)
-                            .addComponent(jLabel_x3y3)
-                            .addComponent(jLabelMoveTo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel_x1y2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel_x1y2)
-                            .addComponent(jLabel_x2y2)
-                            .addComponent(jLabel_x3y2)
-                            .addComponent(jLabelMoveFrom))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel_x1y2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel_x1y1)
                             .addComponent(jLabel_x2y1)
                             .addComponent(jLabel_x3y1)
-                            .addComponent(jLabelBank))
+                            .addComponent(jLabelBank)
+                            .addComponent(jLabelBank4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelPlayerNumber)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(jLabelPlayerNumber))
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonUpdate))
         );
 
         jMenu1.setText("File");
@@ -512,25 +586,6 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-
-        jMenuItem1.setText("Disconnect");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Development");
-
-        jMenuItem2.setText("jMenuItem2");
-        jMenu3.add(jMenuItem2);
-
-        jMenuBar1.add(jMenu3);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -557,7 +612,7 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
                     .addComponent(jTabbedPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel_x1y2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -577,57 +632,68 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
         }
     }//GEN-LAST:event_jMenuItemCreateActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        logic = null;
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void jButton_x1y3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_x1y3ActionPerformed
-
+       JButton button = (javax.swing.JButton) evt.getSource();
+       String buttonName;
+       buttonName = button.getName();
+       procClick(button, buttonName);
     }//GEN-LAST:event_jButton_x1y3ActionPerformed
 
     private void jButton_x2y3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_x2y3ActionPerformed
-        // TODO add your handling code here:
+       JButton button = (javax.swing.JButton) evt.getSource();
+       String buttonName;
+       buttonName = button.getName();
+       procClick(button, buttonName);
     }//GEN-LAST:event_jButton_x2y3ActionPerformed
 
     private void jButton_x1y2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_x1y2ActionPerformed
-        // TODO add your handling code here:
+       JButton button = (javax.swing.JButton) evt.getSource();
+       String buttonName;
+       buttonName = button.getName();
+       procClick(button, buttonName);
     }//GEN-LAST:event_jButton_x1y2ActionPerformed
 
     private void jButton_x2y2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_x2y2ActionPerformed
-        // TODO add your handling code here:
+       JButton button = (javax.swing.JButton) evt.getSource();
+       String buttonName;
+       buttonName = button.getName();
+       procClick(button, buttonName);
     }//GEN-LAST:event_jButton_x2y2ActionPerformed
 
     private void jButton_x3y3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_x3y3ActionPerformed
-        // TODO add your handling code here:
+       JButton button = (javax.swing.JButton) evt.getSource();
+       String buttonName;
+       buttonName = button.getName();
+       procClick(button, buttonName);
     }//GEN-LAST:event_jButton_x3y3ActionPerformed
 
     private void jButton_x3y2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_x3y2ActionPerformed
-        // TODO add your handling code here:
+       JButton button = (javax.swing.JButton) evt.getSource();
+       String buttonName;
+       buttonName = button.getName();
+       procClick(button, buttonName);
     }//GEN-LAST:event_jButton_x3y2ActionPerformed
 
     private void jButton_x1y1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_x1y1ActionPerformed
-        javax.swing.JButton btn = (javax.swing.JButton) evt.getSource();
-        btn.setIcon(null);
-        
+       JButton button = (javax.swing.JButton) evt.getSource();
+       String buttonName;
+       buttonName = button.getName();
+       procClick(button, buttonName); 
     }//GEN-LAST:event_jButton_x1y1ActionPerformed
 
     private void jButton_x3y1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_x3y1ActionPerformed
-        // TODO add your handling code here:
+       JButton button = (javax.swing.JButton) evt.getSource();
+       String buttonName;
+       buttonName = button.getName();
+       procClick(button, buttonName);
+        
     }//GEN-LAST:event_jButton_x3y1ActionPerformed
 
     private void jButton_x2y1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_x2y1ActionPerformed
-        javax.swing.JButton btn = (javax.swing.JButton) evt.getSource();
-        /*if (logic.getPlayerBank() > 0){
-            logic.setMoveFrom("x0y0");
-            logic.setMoveTo(btn.getName());
-            btn.setIcon(playerIcon);
-            logic.setPlayerBank(logic.getPlayerBank() - 1);
-        }else if(logic.getPlayerBank() == 0 && logic.getX2y1() == logic.getPlayer()){
-            logic.setMoveFrom(btn.getName());
-        }else if(!logic.getMoveFrom().equalsIgnoreCase("")){
-            logic.setMoveTo(btn.getName());
-            btn.setIcon(playerIcon);
-        }*/
+       JButton button = (javax.swing.JButton) evt.getSource();
+       String buttonName;
+       buttonName = button.getName();
+       procClick(button, buttonName);
     }//GEN-LAST:event_jButton_x2y1ActionPerformed
 
     private void jBtnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSendActionPerformed
@@ -651,13 +717,13 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_jMenuItemConnectActionPerformed
 
     private void jMenuItemQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemQuitActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jMenuItemQuitActionPerformed
 
     private void jButtonDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDoneActionPerformed
-        if(!logic.getMoveFrom().equalsIgnoreCase("") && !logic.getMoveTo().equalsIgnoreCase(""));
-        logic.sendMove();
-        updateField();
+        if(!logic.getFrom().equalsIgnoreCase("") && !logic.getTo().equalsIgnoreCase("")){
+            logic.makeMove();
+        }
     }//GEN-LAST:event_jButtonDoneActionPerformed
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
@@ -684,10 +750,20 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
         jLabel_x3y2.setText(Integer.toString(logic.getX3y2()));
         jLabel_x3y3.setText(Integer.toString(logic.getX3y3()));
         jLabelPlayerNumber.setText(Integer.toString(logic.getPlayer()));
-        jLabelMoveTo.setText(logic.getMoveFrom());
-        jLabelMoveFrom.setText(logic.getMoveTo());
+        jLabelMoveTo.setText(logic.getFrom());
+        jLabelMoveFrom.setText(logic.getTo());
         jLabelBank.setText(Integer.toString(logic.getBank()));
+        jLabelOBank.setText(Integer.toString(logic.getOBank()));
     }//GEN-LAST:event_jButtonUpdateActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        logic.setFrom(jTextFieldFrom.getText());
+        logic.setTo(jTextFieldTo.getText());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextFieldFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFromActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldFromActionPerformed
 
     /**
      * @param args the command line arguments
@@ -724,6 +800,7 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
         });
     }
 
+    //Append message to chat log
     public void appendChatMessage(String message) {
         jTextAreaChat.append(message + "\n");
         jTextAreaChat.setCaretPosition(jTextAreaChat.getDocument().getLength());
@@ -733,9 +810,10 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
         }
     }
 
+    //Appends message to system log
     public void appendSystemMessage(String message) {
         jTextAreaSystem.append(message + "\n");
-        jTextAreaSystem.setCaretPosition(jTextAreaChat.getDocument().getLength());
+        jTextAreaSystem.setCaretPosition(jTextAreaSystem.getDocument().getLength());
         newSystemMessages++;
         if (jTabbedPane1.getSelectedIndex() != 1) {
             jTabbedPane1.setTitleAt(1, "System (" + newSystemMessages + ")");
@@ -750,6 +828,16 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
         }
     }
 
+    public void setTo(JButton button){
+        logic.setTo(button.getName());
+        jTextFieldTo.setText(button.getName());
+    }
+    
+    public void setFrom(JButton button){
+        logic.setFrom(button.getName());
+        jTextFieldFrom.setText(button.getName());
+    }
+    
     public void setRole(String role) {
         if (role.equalsIgnoreCase("server")) {
             this.setTitle(this.getTitle() + " - Server - Player " + logic.getPlayer());
@@ -777,6 +865,7 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnSend;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonDone;
     private javax.swing.JButton jButtonUpdate;
     private javax.swing.JButton jButton_x1y1;
@@ -793,8 +882,13 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JLabel jLabelBank1;
     private javax.swing.JLabel jLabelBank2;
     private javax.swing.JLabel jLabelBank3;
+    private javax.swing.JLabel jLabelBank4;
+    private javax.swing.JLabel jLabelBank5;
     private javax.swing.JLabel jLabelMoveFrom;
+    private javax.swing.JLabel jLabelMoveFrom1;
     private javax.swing.JLabel jLabelMoveTo;
+    private javax.swing.JLabel jLabelMoveTo1;
+    private javax.swing.JLabel jLabelOBank;
     private javax.swing.JLabel jLabelPlayerNumber;
     private javax.swing.JLabel jLabel_x1y1;
     private javax.swing.JLabel jLabel_x1y2;
@@ -806,11 +900,7 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JLabel jLabel_x3y2;
     private javax.swing.JLabel jLabel_x3y3;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemConnect;
     private javax.swing.JMenuItem jMenuItemCreate;
     private javax.swing.JMenuItem jMenuItemQuit;
@@ -825,6 +915,8 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JTextArea jTextAreaChat;
     private javax.swing.JTextArea jTextAreaSystem;
     private javax.swing.JTextField jTextFieldChat;
+    private javax.swing.JTextField jTextFieldFrom;
+    private javax.swing.JTextField jTextFieldTo;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -854,6 +946,7 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
             jLabelBank2.setEnabled(true);
             jLabelBank3.setEnabled(true);
             jButtonDone.setEnabled(true);
+            System.out.println("Enabling");
         } else {
             jButton_x1y1.setEnabled(false);
             jButton_x1y2.setEnabled(false);
@@ -868,13 +961,22 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
             jLabelBank2.setEnabled(false);
             jLabelBank3.setEnabled(false);
             jButtonDone.setEnabled(false);
+            System.out.println("Diabling");
         }
 
     }
 
     public void updateField() {
         //This method updates the playing field according to the settings in the logic variables
-        //The tokens that belong to th opponent are disabled 
+        //The buttons belonging to the opponent are disabled 
+        System.out.println("Field updating");
+        //Get the string representation of players bank and set from to this if the bank has tokens
+        if(logic.getBank() > 0){
+            logic.setFrom(logic.getPlayerBank());
+        }else{
+            logic.setFrom("");
+        }
+        
         //Bank
         if (logic.getBank() > 0) {
             jLabelBank1.setIcon(sPlayerIcon);
@@ -885,6 +987,18 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
                 }
             }
         }
+        
+        updateButtons(jButton_x1y1);
+        updateButtons(jButton_x1y2);
+        updateButtons(jButton_x1y3);
+        updateButtons(jButton_x2y1);
+        updateButtons(jButton_x2y2);
+        updateButtons(jButton_x2y3);
+        updateButtons(jButton_x3y1);
+        updateButtons(jButton_x3y2);
+        updateButtons(jButton_x3y3);
+        
+        /*Will try to do one method out of all of these
         //X1Y1
         if (logic.getX1y1() == 0 || logic.getX1y1() == logic.getPlayer()) {
             jButton_x1y1.setEnabled(true);
@@ -974,6 +1088,54 @@ public class TTT extends javax.swing.JFrame implements KeyListener {
         } else {
             jButton_x3y3.setEnabled(false);
             jButton_x3y3.setIcon(opponentIcon);
+        }*/
+    }
+    
+    public void updateButtons(JButton button){
+        //Checks if button should be enabled or not
+        if(logic.getButtonNr(button.getName()) == logic.getPlayer() || logic.getButtonNr(button.getName()) == 0 ){
+            button.setEnabled(true);
+            //Checks if button should have the players icon
+            if(logic.getButtonNr(button.getName()) == logic.getPlayer()){
+                button.setIcon(playerIcon);
+            }else{
+                button.setIcon(null);
+            }
+        }else{
+            button.setEnabled(false);
+            button.setIcon(opponentIcon);
         }
     }
+    
+    //Method that processes klicking on buttons on the playingfield
+    private void procClick(JButton btn, String buttonName){ 
+        System.out.println(btn.getName());
+        if(!logic.getFrom().equalsIgnoreCase("") && logic.getButtonNr(buttonName) == 0 && !(logic.getTo().equalsIgnoreCase(btn.getName()))){//Om from är satt knappen är noll och to inte är knappen sätt dit ikon sätt to
+            btn.setIcon(playerIcon);
+            //Om bank ta bort en icon
+            if(logic.getFrom().equalsIgnoreCase(logic.getPlayerBank())){
+                jLabelBank1.setIcon(null);
+                jLabelBank2.setIcon(null);
+                jLabelBank3.setIcon(null);
+                if (logic.getBank() > 1) {
+                    jLabelBank1.setIcon(sPlayerIcon);
+                    if (logic.getBank() > 2) {
+                        jLabelBank2.setIcon(sPlayerIcon);
+                    }
+                }
+            }
+            logic.setTo(btn.getName());
+            System.out.println("Sätter");
+        }else if (logic.getFrom().equalsIgnoreCase("") && logic.getButtonNr(buttonName) == logic.getPlayer()){//Om from är tom och knappen är spelarens Ta bort spelaricon sätt from
+            btn.setIcon(null);
+            logic.setFrom(btn.getName());
+        }else if(logic.getFrom().equalsIgnoreCase(btn.getName()) && logic.getTo().equalsIgnoreCase("")){//Om from är = knappens namn sätt tillbaka ikon och sätt from till noll
+            btn.setIcon(playerIcon);
+            logic.setFrom("");
+        } else if(logic.getTo().equalsIgnoreCase(btn.getName())){//Om to = knappen ta bort ikon sätt to till inget
+            System.out.println("Sätter tillbaka");
+            btn.setIcon(null);
+            logic.setTo("");
+        }
+    }   
 }
